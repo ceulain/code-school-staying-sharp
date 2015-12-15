@@ -1,25 +1,30 @@
 var gulp = require('gulp'),
-plugins = require('load-plugins')(), 
-//tous les plugins du package.json
+autoprefixer = require('autoprefixer'),
+cssbeautify = require('cssbeautify'),
+csscomb = require('csscomb'),
+csso = require('csso'),
+server = require('gulp-server-livereload'),
+imagemin = require('imagemin'),
+rename = require('rename'),
 src = './src',
 dist = './dist';
-
+console.log("totot");
 gulp.task('css', function(){
-    return gulp.src(src + "/assets/css/styles.css");
+    return gulp.src(src + "/assets/css/styles.css")
     // ordonne les propriétés css
-	.pipe(plugins.csscomb())
+	.pipe(csscomb())
     //beautify le css (identation...)
-	.pipe(plugins.cssbeautify())
+	.pipe(cssbeautify())
     //rajoute les prefixes
-	.pipe(plugins.autoprefixer())
+	.pipe(autoprefixer())
    	.pipe(gulp.dest(dst + "./assets/css/"))
 });
 
 
 gulp.task('minify_css', function(){
     return gulp.src(dst + '/assets/css/*.css')
-	.pipe(plugins.csso())
-	.pipe(plugins.rename({
+	.pipe(csso())
+	.pipe(rename({
 	    suffix: '.min'
 	}))
 	.pipe(gulp.dest(dst + '/assets/css/'));
@@ -29,7 +34,7 @@ gulp.task('minify_css', function(){
 
 gulp.task('image', function(){
     return gulp.src(src + '/assets/img/*')
-	.pipe(image({}))
+	.pipe(imagemin({}))
 	.pipe(gulp.dest(dst + '/assets/img/'))
 
 });
@@ -37,10 +42,10 @@ gulp.task('image', function(){
 gulp.task('default', ['css', 'minify_css', 'image']);
 
 gulp.task('webserver', function(){
-    gulp.src('src')
+    gulp.src('./src')
 	.pipe(server({
 	    livereload: true,
-	    directoryListing: true,
-	    open: true
+	    open: true,
+	    defaultFile: 'index.html'
 	}));
 });
