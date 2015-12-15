@@ -1,0 +1,7 @@
+{
+  "name": "staying-sharp",
+  "dependencies": {
+    "angular": "1.4.8",
+      "angular-route": "1.4.7"
+  }
+}
