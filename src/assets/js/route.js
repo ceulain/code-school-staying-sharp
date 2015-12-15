@@ -7,13 +7,7 @@ angular.module('NoteWrangler', ['ngRoute'])
   	    })
 	    .when('/notes', {
 		templateUrl: 'templates/pages/notes/index.html',
-		controller: function($http){
-		    var controller = this;
-      		    $http({method: 'GET', url: '/notes'}).success(function(data){
-			controller.notes = data;
-		    });  
-		},
-    		controllerAs: 'notesCtrl'
+		controller: 'NotesIndexController'
 	    })
 	    .when('/users', {
 		templateUrl: 'templates/pages/users/index.html'
