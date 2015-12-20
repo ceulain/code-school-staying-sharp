@@ -1,14 +1,22 @@
 angular.module('NoteWrangler')
-    .factory('Tweetable', ['$http', function TweetableFactory($http){
+    .provider('Tweetable', [function TweetableFactory(){
 	var characterLength = 144;
-	return function(potentialTweet){
-	    return $http({
-		method: 'POST',
-		url: 'ttp://gentle-spire-1153.herokuapp.com/tweet',
-		data : { 
-		    description: potentialTweet,
-		    maxLength: characterLength
-		}
-	    });
+	
+	this.setLength = function(character){
+	    characterLength = character;
+	};
+
+	this.$get = function($http){
+	    return function(potentialTweet){
+		return $http({
+		    method: 'POST',
+		    url: 'ttp://gentle-spire-1153.herokuapp.com/tweet',
+		    data : { 
+			description: potentialTweet,
+			maxLength: characterLength
+		    }
+		});
+	    };
+
 	};
     }]);
