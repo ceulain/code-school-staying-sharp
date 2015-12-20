@@ -6,7 +6,6 @@ angular.module('NoteWrangler')
 	    });
 	};
 	
-	Note.all().success(function(data) {
-	    $scope.notes = data;
-	});
+	$scope.notes = Note.query();
+
     }]);
