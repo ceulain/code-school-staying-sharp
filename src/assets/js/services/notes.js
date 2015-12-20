@@ -1,8 +1,4 @@
 angular.module('NoteWrangler')
-    .factory('Note', ['$http', function NoteFactory($http){
-	return {
-	    all: function(){
-		return $http({method: 'GET', url: "/notes"});
-	    }
-	};
+    .factory('Note', ['$resource', function NoteFactory($resource){
+	return $resource("/notes", {}, {});
     }]);
