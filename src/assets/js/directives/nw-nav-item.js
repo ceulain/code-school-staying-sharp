@@ -3,5 +3,9 @@ angular.module('NoteWrangler')
     return {
 	restrict: 'E',
 	templateUrl: '../../templates/directives/nw-nav-item.html'
+	require: "^nwNav",
+	link: function(scope, element, attrs, nwNavCtrl){
+
+	}
     };
 });
