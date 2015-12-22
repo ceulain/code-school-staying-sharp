@@ -5,7 +5,17 @@ angular.module('NoteWrangler')
 	templateUrl: '../../templates/directives/nw-nav-item.html'
 	require: "^nwNav",
 	link: function(scope, element, attrs, nwNavCtrl){
+	    scope.isActive = function(){
+		return nwNavCtrl.getAcitveNav() === scope.name;
+	    },
 
+	    scope.active = function(){
+		nwNavCtrl.setActive(scope.name);
+	    }
+	},
+
+	scope : {
+	    name: "@"
 	}
     };
 });
